@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashwin ❤️ Nayana — Our Story</title>
+    <meta name="description" content="Celebrating the romantic journey of Ashwin Mahesh & Nayana R Pillai. Together since 20th January 2025.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Canvas for Floating Hearts & Sparkles -->
+    <canvas id="heartCanvas"></canvas>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <span class="script-font">Ashwin</span>
+            <i class="fa-solid fa-heart nav-heart"></i>
+            <span class="script-font">Nayana</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#timeline">Timeline</a>
+            <a href="#reasons">Reasons</a>
+        </nav>
+    </header>
+
+    <!-- SECTION 1: HERO & LIVE LOVE COUNTER -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <div class="badge-pill">
+                <i class="fa-solid fa-sparkles"></i> 20th January 2025 <i class="fa-solid fa-sparkles"></i>
+            </div>
+            
+            <h1 class="hero-title">
+                Ashwin <span class="heart-pulse">❤️</span> Nayana
+            </h1>
+            
+            <p class="hero-subtitle">
+                "In a world of billions, my heart chose you. Our story began on January 20th, 2025, and every single second since has been magic."
+            </p>
+
+            <!-- Live Love Counter -->
+            <div class="counter-container">
+                <h3 class="counter-label">WE HAVE BEEN IN LOVE FOR</h3>
+                <div class="counter-grid">
+                    <div class="counter-card">
+                        <span id="years" class="counter-value">0</span>
+                        <span class="counter-unit">Years</span>
+                    </div>
+                    <div class="counter-card">
+                        <span id="months" class="counter-value">0</span>
+                        <span class="counter-unit">Months</span>
+                    </div>
+                    <div class="counter-card">
+                        <span id="days" class="counter-value">0</span>
+                        <span class="counter-unit">Days</span>
+                    </div>
+                    <div class="counter-card">
+                        <span id="hours" class="counter-value">0</span>
+                        <span class="counter-unit">Hours</span>
+                    </div>
+                    <div class="counter-card">
+                        <span id="minutes" class="counter-value">0</span>
+                        <span class="counter-unit">Minutes</span>
+                    </div>
+                    <div class="counter-card highlight-card">
+                        <span id="seconds" class="counter-value">0</span>
+                        <span class="counter-unit">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Cue -->
+            <a href="#gallery" class="scroll-cue">
+                <span>Scroll to see our story</span>
+                <i class="fa-solid fa-chevron-down bounce-arrow"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- SECTION 2: HEART-SHAPED PHOTO GALLERY -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-header">
+            <span class="section-tag">Centerpiece</span>
+            <h2 class="section-title">Our Heart of Memories</h2>
+            <p class="section-subtitle">
+                47 moments arranged in a mathematical heart shape ($x = 16\sin^3 t, y = 13\cos t - 5\cos 2t - 2\cos 3t - \cos 4t$)
+            </p>
+            <div class="gallery-view-toggle">
+                <button id="btnHeartView" class="toggle-btn active">
+                    <i class="fa-solid fa-heart"></i> Heart View
+                </button>
+                <button id="btnGridView" class="toggle-btn">
+                    <i class="fa-solid fa-border-all"></i> Grid View
+                </button>
+            </div>
+        </div>
+
+        <!-- Heart View Container (Desktop Parametric Curve) -->
+        <div id="heartGalleryViewport" class="heart-gallery-viewport">
+            <div id="heartGalleryCanvas" class="heart-gallery-canvas">
+                <!-- Dynamically populated photos positioned along parametric heart curves -->
+            </div>
+            <div class="heart-center-text">
+                <span class="center-names">A ❤️ N</span>
+                <span class="center-date">20.01.2025</span>
+            </div>
+        </div>
+
+        <!-- Responsive Grid Fallback Container -->
+        <div id="masonryGalleryContainer" class="masonry-gallery-container hidden">
+            <!-- Dynamically populated masonry items -->
+        </div>
+    </section>
+
+    <!-- SECTION 3: OUR STORY TIMELINE -->
+    <section id="timeline" class="timeline-section">
+        <div class="section-header">
+            <span class="section-tag">Milestones</span>
+            <h2 class="section-title">Our Story Timeline</h2>
+            <p class="section-subtitle">From our very first moment to our eternal forever</p>
+        </div>
+
+        <div class="timeline-container" id="timelineContainer">
+            <div class="timeline-line"></div>
+            <!-- Timeline Cards dynamically populated -->
+        </div>
+    </section>
+
+    <!-- SECTION 4: REASONS I LOVE YOU -->
+    <section id="reasons" class="reasons-section">
+        <div class="section-header">
+            <span class="section-tag">From The Heart</span>
+            <h2 class="section-title">Why I Love You</h2>
+            <p class="section-subtitle">Flip each card to discover a reason why you mean the world to me</p>
+        </div>
+
+        <div class="reasons-grid" id="reasonsGrid">
+            <!-- Cards dynamically populated -->
+        </div>
+
+        <!-- Romantic Quote Generator Box -->
+        <div class="quote-box">
+            <i class="fa-solid fa-quote-left quote-icon"></i>
+            <p id="quoteText" class="quote-text">"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</p>
+            <button id="btnNextQuote" class="btn-quote">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Another Sweet Quote
+            </button>
+        </div>
+    </section>
+
+    <!-- SECTION 5: LIGHTBOX MODAL -->
+    <div id="lightbox" class="lightbox-modal">
+        <div class="lightbox-overlay"></div>
+        <div class="lightbox-content">
+            <button id="lightboxClose" class="lightbox-close" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button id="lightboxPrev" class="lightbox-nav lightbox-prev" aria-label="Previous">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button id="lightboxNext" class="lightbox-nav lightbox-next" aria-label="Next">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+            <div class="lightbox-media">
+                <img id="lightboxImg" src="" alt="Memory Photo">
+            </div>
+            <div class="lightbox-caption-box">
+                <span id="lightboxDate" class="lightbox-date"></span>
+                <h3 id="lightboxTitle" class="lightbox-title"></h3>
+                <p id="lightboxCaption" class="lightbox-caption"></p>
+                <div id="lightboxCounter" class="lightbox-counter">1 / 47</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 6: FLOATING MUSIC PLAYER -->
+    <div class="music-player-widget">
+        <button id="btnMusicToggle" class="music-fab" aria-label="Toggle Romantic Music">
+            <i class="fa-solid fa-music music-icon"></i>
+            <span class="music-pulse-ring"></span>
+        </button>
+        <div id="musicToast" class="music-toast">
+            <span id="musicStatusText">Playing Romantic Ambient Melody 🎵</span>
+        </div>
+    </div>
+
+    <!-- SECTION 7: FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-heart">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h2 class="footer-signature">Ashwin Mahesh ❤️ Nayana R Pillai</h2>
+            <p class="footer-date">Together Since 20.01.2025 • Forever & Always</p>
+            <p class="footer-credit">Made with endless ❤️ for our eternal journey</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
