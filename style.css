@@ -29,8 +29,8 @@
     --glass-bg: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(212, 175, 55, 0.25);
     
-    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    --transition-fast: all 0.2s ease;
+    --transition-smooth: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
 /* --- Global Resets & Base Styles --- */
@@ -84,8 +84,11 @@ body {
     z-index: 1000;
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--glass-border);
     transition: var(--transition-smooth);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .nav-brand {
@@ -229,10 +232,13 @@ body {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: 24px;
     padding: 2rem 1.5rem;
     box-shadow: var(--shadow-soft);
     margin-bottom: 3rem;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .counter-label {
@@ -258,6 +264,8 @@ body {
     flex-direction: column;
     align-items: center;
     transition: var(--transition-smooth);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .counter-card:hover {
@@ -411,6 +419,8 @@ body {
     cursor: pointer;
     transition: transform 0.3s ease, z-index 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .heart-photo-node img {
@@ -479,6 +489,8 @@ body {
     box-shadow: var(--shadow-soft);
     cursor: pointer;
     transition: var(--transition-smooth);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .masonry-item img {
@@ -558,7 +570,9 @@ body {
     width: 50%;
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 .timeline-card.in-view {
@@ -605,6 +619,7 @@ body {
     border: 1px solid var(--glass-border);
     max-width: 400px;
     transition: var(--transition-smooth);
+    will-change: transform;
 }
 
 .timeline-body:hover {
@@ -679,6 +694,7 @@ body {
     text-align: center;
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .flip-card:hover .flip-card-inner,
@@ -757,6 +773,8 @@ body {
     text-align: center;
     box-shadow: var(--shadow-soft);
     position: relative;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .quote-icon {

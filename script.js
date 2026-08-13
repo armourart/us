@@ -74,18 +74,49 @@ function initLiveCounter() {
 // ==========================================================================
 function initHeartCanvas() {
     const canvas = document.getElementById('heartCanvas');
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
 
+    // Debounced resize handler
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }, 150);
     });
 
+    // Create high-performance offscreen canvas sprites for hearts
+    function createHeartSprite(color) {
+        const sCanvas = document.createElement('canvas');
+        sCanvas.width = 100;
+        sCanvas.height = 100;
+        const sCtx = sCanvas.getContext('2d');
+        const size = 80;
+        const topCurveHeight = size * 0.3;
+
+        sCtx.translate(50, 10);
+        sCtx.fillStyle = color;
+        sCtx.beginPath();
+        sCtx.moveTo(0, topCurveHeight);
+        sCtx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurveHeight);
+        sCtx.bezierCurveTo(-size / 2, (size + topCurveHeight) / 2, 0, size, 0, size);
+        sCtx.bezierCurveTo(0, size, size / 2, (size + topCurveHeight) / 2, size / 2, topCurveHeight);
+        sCtx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
+        sCtx.closePath();
+        sCtx.fill();
+        return sCanvas;
+    }
+
+    const roseHeartSprite = createHeartSprite('#E8A598');
+    const goldHeartSprite = createHeartSprite('#D4AF37');
+
     const particles = [];
-    const particleCount = 35;
+    const particleCount = 28; // Optimized particle count for smooth 60fps
 
     class Particle {
         constructor() {
@@ -122,32 +153,8 @@ function initHeartCanvas() {
             ctx.globalAlpha = this.opacity;
 
             if (this.type === 'heart') {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                const topCurveHeight = this.size * 0.3;
-                ctx.moveTo(0, topCurveHeight);
-                ctx.bezierCurveTo(
-                    0, 0,
-                    -this.size / 2, 0,
-                    -this.size / 2, topCurveHeight
-                );
-                ctx.bezierCurveTo(
-                    -this.size / 2, (this.size + topCurveHeight) / 2,
-                    0, this.size,
-                    0, this.size
-                );
-                ctx.bezierCurveTo(
-                    0, this.size,
-                    this.size / 2, (this.size + topCurveHeight) / 2,
-                    this.size / 2, topCurveHeight
-                );
-                ctx.bezierCurveTo(
-                    this.size / 2, 0,
-                    0, 0,
-                    0, topCurveHeight
-                );
-                ctx.closePath();
-                ctx.fill();
+                const sprite = this.color === '#E8A598' ? roseHeartSprite : goldHeartSprite;
+                ctx.drawImage(sprite, -this.size / 2, -this.size / 2, this.size, this.size);
             } else {
                 ctx.fillStyle = '#D4AF37';
                 ctx.beginPath();
@@ -162,14 +169,31 @@ function initHeartCanvas() {
         particles.push(new Particle());
     }
 
+    let animFrameId = null;
+    let isVisible = true;
+
     function animate() {
+        if (!isVisible) return;
         ctx.clearRect(0, 0, width, height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-        requestAnimationFrame(animate);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        animFrameId = requestAnimationFrame(animate);
     }
+
+    // Pause animation when tab is inactive to save GPU/CPU cycles
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            isVisible = false;
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+        } else {
+            if (!isVisible) {
+                isVisible = true;
+                animate();
+            }
+        }
+    });
 
     animate();
 }
@@ -216,10 +240,15 @@ function initGallery() {
         masonryContainer.classList.remove('hidden');
     });
 
+    // Debounce gallery window resize handler
+    let galleryResizeTimeout;
     window.addEventListener('resize', () => {
-        if (currentViewMode === 'heart') {
-            renderHeartGallery();
-        }
+        clearTimeout(galleryResizeTimeout);
+        galleryResizeTimeout = setTimeout(() => {
+            if (currentViewMode === 'heart') {
+                renderHeartGallery();
+            }
+        }, 200);
     });
 }
 
