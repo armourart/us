@@ -20,7 +20,7 @@
     
     --font-heading: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Poppins', -apple-system, sans-serif;
-    --font-script: 'Great Vibes', cursive;
+    --font-script: 'Alex Brush', 'Great Vibes', cursive;
     
     --shadow-soft: 0 10px 30px rgba(107, 29, 47, 0.07);
     --shadow-gold: 0 8px 25px rgba(212, 175, 55, 0.25);
@@ -69,6 +69,15 @@ body {
 .script-font {
     font-family: var(--font-script);
     font-weight: 400;
+    display: inline-block;
+}
+
+.script-font::first-letter,
+.brand-cap {
+    font-size: 1.35em;
+    font-weight: 700;
+    line-height: 1;
+    display: inline-block;
 }
 
 /* --- Navigation Bar --- */
