@@ -74,8 +74,8 @@ body {
 
 .script-font::first-letter,
 .brand-cap {
-    font-size: 1.35em;
-    font-weight: 700;
+    font-size: 1.25em;
+    font-weight: inherit;
     line-height: 1;
     display: inline-block;
 }
