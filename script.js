@@ -209,14 +209,12 @@ function initGallery() {
     const btnHeart = document.getElementById('btnHeartView');
     const btnGrid = document.getElementById('btnGridView');
 
-    // Auto-detect responsive viewport: default to grid on mobile
-    if (window.innerWidth < 820) {
-        currentViewMode = 'grid';
-        btnHeart.classList.remove('active');
-        btnGrid.classList.add('active');
-        document.getElementById('heartGalleryViewport').style.display = 'none';
-        masonryContainer.classList.remove('hidden');
-    }
+    // Keep Heart View active by default on all devices (mobile & desktop)
+    currentViewMode = 'heart';
+    btnHeart.classList.add('active');
+    btnGrid.classList.remove('active');
+    document.getElementById('heartGalleryViewport').style.display = 'flex';
+    masonryContainer.classList.add('hidden');
 
     // Render both layouts
     renderHeartGallery();
@@ -267,8 +265,8 @@ function renderHeartGallery() {
     const centerX = width / 2;
     const centerY = height / 2 - 20;
 
-    const scaleX = width > 800 ? 25 : width > 500 ? 18 : 12;
-    const scaleY = width > 800 ? 21 : width > 500 ? 15 : 10;
+    const scaleX = width > 800 ? 25 : width > 500 ? 17 : width > 380 ? 10.5 : 8.5;
+    const scaleY = width > 800 ? 21 : width > 500 ? 14 : width > 380 ? 9.5 : 7.5;
 
     const totalPhotos = galleryPhotos.length;
     

@@ -1080,9 +1080,38 @@ body {
 
 /* --- RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 900px) {
-    .hero-title { font-size: 3.2rem; }
-    .counter-grid { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
-    .counter-value { font-size: 2rem; }
+    .navbar {
+        padding: 0.8rem 3%;
+    }
+    .nav-brand {
+        font-size: 1.4rem;
+    }
+    .nav-links {
+        gap: 1rem;
+    }
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+    .hero-title { 
+        font-size: 3.2rem; 
+    }
+    .counter-container {
+        padding: 1.5rem 0.8rem;
+    }
+    .counter-grid { 
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 0.4rem; 
+    }
+    .counter-card {
+        padding: 0.8rem 0.2rem;
+        border-radius: 12px;
+    }
+    .counter-value { 
+        font-size: 1.6rem; 
+    }
+    .counter-unit {
+        font-size: 0.65rem;
+    }
     
     .timeline-card, .timeline-card:nth-child(even) {
         width: 100%;
@@ -1099,15 +1128,93 @@ body {
     .lightbox-next { right: 10px; }
     .lightbox-nav { background: rgba(0, 0, 0, 0.6); }
     
-    .heart-gallery-viewport { height: 600px; }
-    .heart-photo-node { width: 44px; height: 44px; margin-left: -22px; margin-top: -22px; }
+    .heart-gallery-viewport { height: 500px; }
+    .heart-photo-node { width: 38px; height: 38px; margin-left: -19px; margin-top: -19px; }
+    .center-names { font-size: 2.5rem; }
 }
 
 @media (max-width: 600px) {
-    .nav-links { display: none; }
-    .hero-title { font-size: 2.5rem; }
-    .counter-grid { grid-template-columns: repeat(2, 1fr); }
-    .section-title { font-size: 2.2rem; }
-    
-    .gallery-view-toggle { flex-direction: column; width: 220px; margin: 1.5rem auto 0 auto; }
+    .navbar {
+        padding: 0.6rem 2%;
+        gap: 0.3rem;
+    }
+    .nav-brand {
+        font-size: 1.2rem;
+    }
+    .nav-links { 
+        display: flex; 
+        gap: 0.5rem; 
+    }
+    .nav-links a {
+        font-size: 0.75rem;
+    }
+    .hero-section {
+        padding-top: 5.5rem;
+    }
+    .hero-title { 
+        font-size: 2.2rem; 
+    }
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+    .badge-pill {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+    .counter-container {
+        padding: 1.2rem 0.4rem;
+        border-radius: 16px;
+    }
+    .counter-label {
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 1rem;
+    }
+    .counter-grid { 
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 0.25rem; 
+    }
+    .counter-card {
+        padding: 0.6rem 0.1rem;
+        border-radius: 10px;
+    }
+    .counter-value { 
+        font-size: 1.15rem; 
+    }
+    .counter-unit {
+        font-size: 0.55rem;
+        letter-spacing: 0;
+    }
+    .section-title { 
+        font-size: 2rem; 
+    }
+    .heart-gallery-viewport { 
+        height: 420px; 
+    }
+    .heart-photo-node { 
+        width: 30px; 
+        height: 30px; 
+        margin-left: -15px; 
+        margin-top: -15px; 
+    }
+    .center-names { 
+        font-size: 2rem; 
+    }
+    .center-date {
+        font-size: 0.75rem;
+    }
+    .gallery-view-toggle { 
+        flex-direction: row; 
+        width: auto; 
+        margin: 1rem auto 0 auto; 
+    }
+    .music-player-widget {
+        bottom: 1.2rem;
+        right: 1rem;
+    }
+    .music-fab {
+        width: 46px;
+        height: 46px;
+        font-size: 1.1rem;
+    }
 }
