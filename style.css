@@ -95,6 +95,8 @@ body {
     background: #FAF7F2;
     border-bottom: 1px solid #E5D8CC;
     box-shadow: 0 2px 15px rgba(107, 29, 47, 0.05);
+    /* Isolate navbar from child animation repaints */
+    isolation: isolate;
 }
 
 .nav-brand {
@@ -110,21 +112,17 @@ body {
 .nav-heart {
     font-size: 1.2rem;
     color: #e63946;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    /* Fixed size wrapper so scale() animation never shifts neighbours */
-    width: 1.4rem;
-    height: 1.4rem;
+    display: inline-block;
     flex-shrink: 0;
-    animation: heartPulse 1.5s infinite ease-in-out;
-    will-change: transform;
-    transform-origin: center center;
+    /* Use opacity-only pulse — NO transform/scale so neighbours never shift */
+    animation: navHeartGlow 1.5s infinite ease-in-out;
 }
 
 .nav-links {
     display: flex;
     gap: 2rem;
+    /* Prevent any layout change from propagating into nav-links */
+    contain: layout style;
 }
 
 .nav-links a {
@@ -1066,6 +1064,14 @@ body {
 }
 
 /* --- KEYFRAME ANIMATIONS --- */
+
+/* Nav heart: opacity-only pulse — zero layout impact */
+@keyframes navHeartGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* Footer/hero heart: scale pulse (safe outside navbar) */
 @keyframes heartPulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
