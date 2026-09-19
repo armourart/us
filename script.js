@@ -470,22 +470,37 @@ function initMusicPlayer() {
     const toast = document.getElementById('musicToast');
     const statusText = document.getElementById('musicStatusText');
 
+    // HTML5 Audio element for Neela Maalakhe
+    const audio = new Audio('studio-version--porinju-mariyam-josejoshiyjoju-george-nyla-ushajakes-bejoy.mp3');
+    audio.loop = true;
+    audio.volume = 0.85;
+    audio.preload = 'auto';
+
     let isPlaying = false;
-    let audioContext = null;
-    let oscillatorInterval = null;
 
     fab.addEventListener('click', () => {
-        isPlaying = !isPlaying;
-
-        if (isPlaying) {
-            fab.classList.add('playing');
-            showToast('Playing Soothing Romantic Melody 🎵');
-            playAmbientMelody();
+        if (!isPlaying) {
+            // Play
+            audio.play().then(() => {
+                isPlaying = true;
+                fab.classList.add('playing');
+                showToast('♪ Neela Maalakhe — Playing 🎵');
+            }).catch(() => {
+                showToast('Tap again to play music 🎵');
+            });
         } else {
+            // Pause
+            audio.pause();
+            isPlaying = false;
             fab.classList.remove('playing');
-            showToast('Music Paused');
-            stopAmbientMelody();
+            showToast('Music Paused ⏸');
         }
+    });
+
+    // Reset state if audio ends (in case loop is removed later)
+    audio.addEventListener('ended', () => {
+        isPlaying = false;
+        fab.classList.remove('playing');
     });
 
     function showToast(msg) {
@@ -494,45 +509,6 @@ function initMusicPlayer() {
         setTimeout(() => {
             toast.classList.remove('active');
         }, 3000);
-    }
-
-    // Synthesize soothing ambient piano-like chords using Web Audio API
-    function playAmbientMelody() {
-        if (!audioContext) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioContext.state === 'suspended') {
-            audioContext.resume();
-        }
-
-        const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23]; // C, E, G, C5, A, F
-        let noteIdx = 0;
-
-        oscillatorInterval = setInterval(() => {
-            if (!isPlaying) return;
-            const osc = audioContext.createOscillator();
-            const gain = audioContext.createGain();
-
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(notes[noteIdx], audioContext.currentTime);
-
-            gain.gain.setValueAtTime(0.08, audioContext.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 2.5);
-
-            osc.connect(gain);
-            gain.connect(audioContext.destination);
-
-            osc.start();
-            osc.stop(audioContext.currentTime + 2.5);
-
-            noteIdx = (noteIdx + 1) % notes.length;
-        }, 800);
-    }
-
-    function stopAmbientMelody() {
-        if (oscillatorInterval) {
-            clearInterval(oscillatorInterval);
-        }
     }
 }
 
