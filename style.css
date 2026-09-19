@@ -95,9 +95,6 @@ body {
     background: #FAF7F2;
     border-bottom: 1px solid #E5D8CC;
     box-shadow: 0 2px 15px rgba(107, 29, 47, 0.05);
-    transition: var(--transition-smooth);
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 .nav-brand {
@@ -113,7 +110,16 @@ body {
 .nav-heart {
     font-size: 1.2rem;
     color: #e63946;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Fixed size wrapper so scale() animation never shifts neighbours */
+    width: 1.4rem;
+    height: 1.4rem;
+    flex-shrink: 0;
     animation: heartPulse 1.5s infinite ease-in-out;
+    will-change: transform;
+    transform-origin: center center;
 }
 
 .nav-links {
